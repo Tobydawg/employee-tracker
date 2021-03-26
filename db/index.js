@@ -25,7 +25,7 @@ createEmployee(employee) {
 
 
 // Update_Employee_Role
-updateEmployeeRole(employeeId, roleId) {
+findEmployeeRole(employeeId, roleId) {
     return this.connection.promise().query(
         "UPDATE employee SET role_id = ? WHERE id = ?"
         [roleId,employeeId]

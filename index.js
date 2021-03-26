@@ -1,6 +1,5 @@
 const db = require(".db");
 const {prompt} = require("inquirer");
-
 require("console.table");
 
 init();
@@ -46,6 +45,7 @@ function employeeQs() {
       createNewEmployee();
       break;
       case "Update_Employee_Role": 
+      updateEmployeeRole()
       break;
       case "View_Roles":
         viewRoles(); 
@@ -123,7 +123,50 @@ function employeeQs() {
 
 
 // Update_Employee_Role
+function updateEmployeeRole() {
+  db.findAllEmployees() 
+  .then(([rows]) => {
+    let employees = rows;
+    const employeeChoices = employee.map(({ id, first_name, last_name }) => ({
+      name:   `${first_name} ${last_name}`,
+      value: id
+    }));
 
+    prompt([
+      {
+        type: "list",
+        name: "employeeId",
+        message: "Who's role would you like to change?",
+        choices: employeeChoices
+      }
+    ])
+    .then(res => {
+      let employeeId = res.employeeId;
+      db.viewAllRoles()
+      .then(([rows]) => {
+        let roles = rows;
+        const roleChoices = roles.map(({ id, title }) => ({
+          name: title,
+          value: id
+        }));
+
+        prompt([{
+          type: "list",
+          name: "roleId",
+          message: "What role do you want to assign from this list of roles",
+          choices: roleChoices
+
+        }])
+        .then(res => db.updateEmployeeRole(employeeId, res.roleId))
+        .then(() => console.log("update employee's role"))
+        .then(() => employeeQs())
+
+      })
+    })
+
+  })
+
+}
 
 // View_Role
 function viewRoles() {
@@ -133,14 +176,30 @@ function viewRoles() {
    console.log("\n");
    console.table(roles);
    
-  }).then(() => employeeQs)
+  }).then(() => employeeQs())
 }
 
 
 // Add_Department
 
+function addDepartment() {
+  prompt([ {
+    name: "name",
+    message: "What is the name of the department?"
+  }])
+  .then(res => {
+    let name = res;
+    db.createDepartment(name)
+    .then(() => console.log(`Added ${name.name} to the database`))
+    .then(() => employeeQs())
+  })
+}
 
-
+// quit the application 
+function quit() {
+  console.log("Bye!");
+  process.exit();
+}
 
 
 
@@ -304,4 +363,3 @@ function viewRoles() {
 
 
 
-// // it's  switch cases

@@ -46,7 +46,7 @@ createDepartment(department) {
     
 
 }
-
+}
 
 // findAllDepartments(){
 //     return this.connection.promise().query(

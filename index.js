@@ -1,8 +1,9 @@
-const db = require(".db");
+const db = require("DB");
 const {prompt} = require("inquirer");
 require("console.table");
 
-init();
+
+//init();
 
 function employeeQs() {
   prompt([ 
@@ -33,6 +34,7 @@ function employeeQs() {
      
   ]
 }
+
   ]
   ) .then(res => {
     let choice = res.choice;
@@ -200,9 +202,12 @@ function quit() {
   console.log("Bye!");
   process.exit();
 }
+}
+
+employeeQs();
 
 
-
+//module exports = (inquirer, DB, console.table)
 
 
 

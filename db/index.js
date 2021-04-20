@@ -40,6 +40,11 @@ class Database {
       .promise()
       .query("INSERT INTO department SET ?", department);
   }
+  findAllDept() {
+    return this.connection.promise().query(
+      "SELECT * FROM department;"
+    );
+}
 }
 module.exports = new Database(connection);
 

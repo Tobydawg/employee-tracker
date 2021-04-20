@@ -3,7 +3,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "seed": "npm run seed"
+    "seed": "npm db/seeds.sql"
   },
   "dependencies": {
     "console.table": "^0.10.0",

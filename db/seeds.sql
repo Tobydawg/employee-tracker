@@ -16,9 +16,9 @@ VALUES
     ('Software Engineer', 120000, 2),
     ('Account Manager', 160000, 3),
 INSERT INTO employee
-    (first_name, last_name, role_id, manager_id)
+    (first_name, last_name, role_id, manager_id, id)
 VALUES
-    ('Jeremy', 'Ingrid', 1, NULL),
+    ('Jeremy', 'Ingrid', 1, NULL, ),
     ('Tommy', 'James', 2, 1),
     ('Reverand', 'Horton-Heat', 3, NULL),
     ('Layne', 'Stayley', 4, 3),

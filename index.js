@@ -30,6 +30,10 @@ function employeeQs() {
           value: "Add_Department",
         },
         {
+          name: "View All Departments",
+          value: "View_Departments",
+        },
+        {
           name: "Quit",
           value: "QUIT",
         },
@@ -54,6 +58,9 @@ function employeeQs() {
       case "Add_Department":
         addDepartment();
         break;
+        case "View_Departments":
+          viewDept();
+          break;
       default:
         quit();
     }
@@ -194,6 +201,19 @@ function employeeQs() {
         .then(() => employeeQs());
     });
   }
+ // View_Departments
+ function viewDept() {
+  db.findAllDept()
+    .then(([rows]) => {
+      let roles = rows;
+      console.log("\n");
+      console.table(roles);
+    })
+    .then(() => employeeQs());
+}
+
+
+
   // quit the application
   function quit() {
     console.log("Bye!");
